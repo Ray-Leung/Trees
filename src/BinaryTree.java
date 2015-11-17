@@ -7,11 +7,19 @@ import java.util.Scanner;
 public class BinaryTree<E> implements Serializable {
     protected Node<E> root;
 
-    private class Node<E> {
+    /**
+     * Create a private Node class.
+     * @param <E> Element
+     */
+    protected class Node<E> {
         protected E data;
         protected Node<E> left;
         protected Node<E> right;
 
+        /**
+         * Define a Node.
+         * @param data local element
+         */
         public Node(E data) {
             this.data = data;
             left = null;
