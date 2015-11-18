@@ -61,6 +61,40 @@ public class KWPriorityQueue<E> extends AbstractQueue<E>  implements Queue<E> {
             parent = (child - 1)/2;
         }
         return true;
+
+    }
+    @Override
+    public boolean isEmpty() {
+        if (data.size() == 0 || data.isEmpty()) return false;
+        else return true;
+    }
+
+    @Override
+    public E remove() {
+        if (isEmpty())
+            new IllegalArgumentException();
+
+        E result = data.get(0);
+        if (data.size() == 1) {
+            data.remove(0);
+            return result;
+        }
+        data.set(0, data.remove(data.size() - 1));
+        int parent = 0;
+        while (true) {
+            int leftChild = 2 * parent + 1;
+            if (leftChild >= data.size()) break;
+            int rightChild = leftChild + 1;
+            int minChild = leftChild;
+            if (rightChild < data.size() && compare(data.get(leftChild), data.get(rightChild)) > 0) {
+                minChild = rightChild;
+            }
+            if (compare(data.get(parent), data.get(minChild)) > 0) {
+                swap(parent, minChild);
+                parent = minChild;
+            } else break;
+        }
+        return result;
     }
 
     @Override
